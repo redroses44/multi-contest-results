@@ -4,8 +4,12 @@
   "description": "proovitöö",
   "main": "server.js",
   "scripts": {
+    "client": "npm start --prefix client",
+    "client-install": "npm i --prefix client",
+    "server": "nodemon server",
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "app": "concurrently \"npm start\" \"npm run client\""
   },
   "keywords": [
     "mern",
@@ -18,6 +22,7 @@
   "author": "Valeri Krušinin",
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "mongoose": "^5.5.0",
     "validator": "^10.11.0"
