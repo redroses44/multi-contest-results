@@ -39,7 +39,32 @@ router.post('/', (req, res) => {
 router.get('/:eventName', (req, res) => {
   Result.find()
     .then(results => {
-      const filteredResults = results.filter(result => result.eventName === req.params.eventName)
+      const filteredResults = results
+        .filter(result => result.eventName === req.params.eventName)
+      res.json(filteredResults)
+    }).catch(err => console.log(err))
+})
+
+//SORT RESULTS BY POINTS ASCENDING
+
+router.get('/filter/asc/:eventName', (req, res) => {
+  Result.find()
+    .sort({ points: 1 })
+    .then(results => {
+      const filteredResults = results
+        .filter(result => result.eventName === req.params.eventName)
+      res.json(filteredResults)
+    }).catch(err => console.log(err))
+})
+
+//SORT RESULTS BY POINTS DESCENDING
+
+router.get('/filter/desc/:eventName', (req, res) => {
+  Result.find()
+    .sort({ points: -1 })
+    .then(results => {
+      const filteredResults = results
+        .filter(result => result.eventName === req.params.eventName)
       res.json(filteredResults)
     }).catch(err => console.log(err))
 })
