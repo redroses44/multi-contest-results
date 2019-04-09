@@ -9,6 +9,7 @@ module.exports = function validateResultFields(data) {
   data.country = !isEmpty(data.country) ? data.country : ''
   data.athlete = !isEmpty(data.athlete) ? data.athlete : ''
   data.time = !isEmpty(data.time) ? data.time : ''
+  data.eventName = !isEmpty(data.eventName) ? data.eventName : ''
 
   if (Validator.isEmpty(data.rank)) {
     errors.rank = 'Rank is required.'
@@ -21,6 +22,9 @@ module.exports = function validateResultFields(data) {
   }
   if (Validator.isEmpty(data.time)) {
     errors.time = 'Time is required.'
+  }
+  if (Validator.isEmpty(data.eventName)) {
+    errors.eventName = 'Event name is required.'
   }
 
   return {

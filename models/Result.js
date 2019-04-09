@@ -20,6 +20,10 @@ const ResultSchema = new Schema({
   },
   points: {
     type: Number
+  },
+  eventName: {
+    type: String,
+    required: true
   }
 })
 

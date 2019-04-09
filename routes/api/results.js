@@ -26,14 +26,23 @@ router.post('/', (req, res) => {
           country: req.body.country,
           athlete: req.body.athlete,
           time: req.body.time,
-          points: req.body.points
+          points: req.body.points,
+          eventName: req.body.eventName
         })
-        console.log(newResult)
         newResult.save().then(result => res.json(result))
       }
     }).catch(err => console.log(err))
 })
 
+//GET RESULTS BY EVENTNAME
+
+router.get('/:eventName', (req, res) => {
+  Result.find()
+    .then(results => {
+      const filteredResults = results.filter(result => result.eventName === req.params.eventName)
+      res.json(filteredResults)
+    }).catch(err => console.log(err))
+})
 
 //GET ALL RESULTS
 
@@ -95,5 +104,6 @@ router.put('/:id', (req, res) => {
       }
     })
 })
+
 
 module.exports = router
