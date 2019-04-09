@@ -10,8 +10,10 @@ const port = process.env.PORT || 5000;
 const db = require('./config/keys').mongoURI;
 
 const results = require('./routes/api/results')
+const events = require('./routes/api/events')
 
 app.use('/api/results', results)
+app.use('/api/events', events)
 
 mongoose
   .connect(db)

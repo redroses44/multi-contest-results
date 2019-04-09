@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const ResultSchema = new Schema({
+  event: {
+    type: Schema.Types.ObjectId
+  },
   rank: {
     type: Number,
     required: true
@@ -20,10 +23,6 @@ const ResultSchema = new Schema({
   },
   points: {
     type: Number
-  },
-  eventName: {
-    type: String,
-    required: true
   }
 })
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+const Event = require('../../models/Event')
 const Result = require('../../models/Result')
 const validateResultFields = require('../../helpers/validateResultFields')
 
@@ -20,7 +21,7 @@ router.get('/:id', async (req, res) => {
 
 //ADD NEW RESULT
 
-router.post('/', async (req, res) => {
+router.post('/:eventName', async (req, res) => {
 
   const { errors, isValid } = validateResultFields(req.body)
 
@@ -28,32 +29,30 @@ router.post('/', async (req, res) => {
     res.json(400, errors)
   }
 
-  const result = await Result
-    .findOne({ athlete: req.body.athlete })
+  const event = await Event.findOne({ name: req.params.eventName })
 
-  if (result) {
-    errors.result = 'This athlete already has a result'
-    res.json(400, errors)
-  } else {
-    const newResult = new Result({
-      rank: req.body.rank,
-      country: req.body.country,
-      athlete: req.body.athlete,
-      time: req.body.time,
-      points: req.body.points,
-      eventName: req.body.eventName
+  const newResult = new Result({
+    rank: req.body.rank,
+    country: req.body.country,
+    athlete: req.body.athlete,
+    time: req.body.time,
+    points: req.body.points,
+    eventName: req.body.eventName
+  })
+
+  event.results.push(newResult)
+
+  try {
+    await event.save()
+    await newResult.save()
+    await res.json(newResult)
+  } catch (e) {
+    await res.json({
+      error: 'Something went wrong.'
     })
-    try {
-      await newResult.save()
-      await res.json(newResult)
-    } catch (e) {
-      await res.json({
-        error: 'Something went wrong.'
-      })
-    }
   }
-})
 
+})
 
 //GET RESULTS BY EVENTNAME
 
