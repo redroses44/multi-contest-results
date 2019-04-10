@@ -52,6 +52,18 @@ router.post('/:eventName', async (req, res) => {
       error: 'Something went wrong.'
     })
   }
+})
+
+//DELETE RESULT 
+
+router.delete('/:eventName/:resultId', async (req, res) => {
+  const event = await Event.findOne({ name: req.params.eventName })
+  const removeIndex = event.results
+    .map(result => result._id.toString())
+    .indexOf(req.params.resultId)
+  event.results.splice(removeIndex, 1)
+  await event.save()
+  await res.json(event)
 
 })
 

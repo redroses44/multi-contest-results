@@ -32,6 +32,15 @@ class EventResults extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  onDelete = async (id, e) => {
+    e.preventDefault()
+    const { results, eventName } = this.state
+    const newArray = results.filter(result => result._id !== id)
+    this.setState({ results: newArray })
+    await axios.delete(`http://localhost:5000/api/results/${eventName}/${id}`)
+
+  }
+
   onSubmit = async e => {
     const { rank, country, athlete, time, eventName } = this.state
     e.preventDefault()
@@ -55,12 +64,15 @@ class EventResults extends Component {
     const allResults = results.length === 0 ?
       'There is no results in this event yet.'
       : results.map(result =>
-        <tr>
+        <tr key={result._id}>
           <th scope="row">{result.rank}</th>
           <td>{result.country}</td>
           <td>{result.athlete}</td>
           <td>{result.time}</td>
           <td>{result.rank <= 10 ? pointsConstant / result.rank : 0}</td>
+          <td>
+            <button className="btn btn-danger" onClick={this.onDelete.bind(this, result._id)}>Delete</button>
+          </td>
         </tr>)
     return (
       <React.Fragment>
@@ -74,7 +86,7 @@ class EventResults extends Component {
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal">Add Result</button>
-              <table class="table my-3 table-hover">
+              <table className="table my-3 table-hover">
                 <thead className="bg-light">
                   <tr>
                     <th scope="col">Rank</th>
@@ -82,6 +94,7 @@ class EventResults extends Component {
                     <th scope="col">Athlete</th>
                     <th scope="col">Time</th>
                     <th scope="col">Points</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
