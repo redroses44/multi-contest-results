@@ -37,10 +37,11 @@ router.post('/:eventName', async (req, res) => {
     athlete: req.body.athlete,
     time: req.body.time,
     points: req.body.points,
-    eventName: req.body.eventName
   })
 
-  event.results.push(newResult)
+  event.results.filter(event => event.rank === newResult.rank).length >= 1 ? res.json(400, {
+    rankexists: 'Someone has that rank already.'
+  }) : event.results.push(newResult)
 
   try {
     await event.save()

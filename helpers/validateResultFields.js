@@ -11,6 +11,10 @@ module.exports = function validateResultFields(data) {
   data.time = !isEmpty(data.time) ? data.time : ''
 
 
+
+  if (!Validator.isNumeric(data.rank)) {
+    errors.rank = 'Rank must be a number.'
+  }
   if (Validator.isEmpty(data.rank)) {
     errors.rank = 'Rank is required.'
   }

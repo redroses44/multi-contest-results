@@ -33,17 +33,8 @@ router.post('/', async (req, res) => {
 router.get('/:id', (req, res) => {
   Event.findById(req.params.id)
     .then(event => {
-      console.log(event)
-      if (!event) {
-        res.json(404, {
-          noevent: 'Event not found.'
-        })
-      } else {
-        res.json(event)
-      }
-    }).catch(err => res.json(400, {
-      noevent: 'Event not found.'
-    }))
+      res.json(event)
+    })
 })
 
 
@@ -52,6 +43,16 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Event.findByIdAndRemove(req.params.id)
     .then(event => {
+      res.json(event)
+    })
+})
+
+router.get('/:id/asc', (req, res) => {
+  Event.findById(req.params.id)
+    .then(event => {
+      event.results
+        .map(result => result.rank)
+
       res.json(event)
     })
 })
