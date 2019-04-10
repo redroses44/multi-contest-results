@@ -16,8 +16,8 @@ router.post('/', async (req, res) => {
   }
   const event = await Event.findOne({ name: req.body.name })
   if (event) {
-    res.json(404, {
-      error: 'Event with that name already exists.'
+    res.json(400, {
+      alreadyexists: 'Event with that name already exists.'
     })
   } else {
     const newEvent = new Event({
