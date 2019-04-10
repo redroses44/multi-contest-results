@@ -38,8 +38,9 @@ class EventResults extends Component {
     const newArray = results.filter(result => result._id !== id)
     this.setState({ results: newArray })
     await axios.delete(`http://localhost:5000/api/results/${eventName}/${id}`)
-
   }
+
+
 
   onSubmit = async e => {
     const { rank, country, athlete, time, eventName } = this.state
@@ -69,7 +70,10 @@ class EventResults extends Component {
           <td>{result.country}</td>
           <td>{result.athlete}</td>
           <td>{result.time}</td>
-          <td>{result.rank <= 10 ? pointsConstant / result.rank : 0}</td>
+          <td>{result.rank <= 15 ? (result.time * pointsConstant).toFixed(1) : 0}</td>
+          <td>
+            <Link to={`/edit/${result._id}`} className="btn btn-success">Edit</Link>
+          </td>
           <td>
             <button className="btn btn-danger" onClick={this.onDelete.bind(this, result._id)}>Delete</button>
           </td>
@@ -78,7 +82,7 @@ class EventResults extends Component {
       <React.Fragment>
         <div className="container">
           <div className="row mt-5">
-            <div className="col-md-12">
+            <div className="col-md-12 mt-5">
               <h3 className="d-inline">{eventName}</h3>
               <Link className="btn btn-outline-dark ml-2" to="/">Back</Link>
               <button
@@ -86,14 +90,15 @@ class EventResults extends Component {
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal">Add Result</button>
-              <table className="table my-3 table-hover">
+              <table className="table my-3 table-hover table-responsive-sm">
                 <thead className="bg-light">
                   <tr>
                     <th scope="col">Rank</th>
                     <th scope="col">Country</th>
                     <th scope="col">Athlete</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Result</th>
                     <th scope="col">Points</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>

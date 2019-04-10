@@ -34,7 +34,7 @@ class AddEvent extends Component {
     const { errors } = this.state
     return (
       <React.Fragment>
-        <div className="col-sm-8 col-md-6 mx-auto d-flex justify-content-center align-items-center" style={{ height: '90vh' }}>
+        <div className="col-sm-8 col-md-6 mx-auto d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
           <div className="card p-5 bg-dark">
             <h1 className="display-4 text-white text-center mb-3">Add Event</h1>
             <form onSubmit={this.onSubmit} className="p-2">

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Navbar from './components/layout/Navbar'
 import AddEvent from './components/events/AddEvent'
+import EditEvent from './components/events/EditEvent'
 import Events from './components/events/Events'
 import EventResults from './components/events/EventResults.js'
 
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/add" component={AddEvent} />
           <Route exact path="/" component={Events} />
           <Route exact path="/event/:id" component={EventResults} />
+          <Route exact path="/edit/:id/" component={EditEvent} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>
