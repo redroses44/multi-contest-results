@@ -33,8 +33,17 @@ router.post('/', async (req, res) => {
 router.get('/:id', (req, res) => {
   Event.findById(req.params.id)
     .then(event => {
-      res.json(event)
-    })
+      console.log(event)
+      if (!event) {
+        res.json(404, {
+          noevent: 'Event not found.'
+        })
+      } else {
+        res.json(event)
+      }
+    }).catch(err => res.json(400, {
+      noevent: 'Event not found.'
+    }))
 })
 
 

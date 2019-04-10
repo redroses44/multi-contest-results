@@ -31,7 +31,7 @@ class Events extends Component {
             className="btn btn-outline-danger float-right"
             onClick={this.deleteEvent.bind(this, event._id)}>Delete</button>
           <Link
-            className="btn btn-outline-primary float-right mr-2" to={`/${event._id}`}>Results</Link>
+            className="btn btn-outline-primary float-right mr-2" to={`/event/${event._id}`}>Results</Link>
         </div>
       </div>)
 
