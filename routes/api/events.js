@@ -37,6 +37,16 @@ router.get('/:id', (req, res) => {
     })
 })
 
+
+//DELETE EVENT BY ID
+
+router.delete('/:id', (req, res) => {
+  Event.findByIdAndRemove(req.params.id)
+    .then(event => {
+      res.json(event)
+    })
+})
+
 //GET ALL EVENTS
 
 router.get('/', (req, res) => {
