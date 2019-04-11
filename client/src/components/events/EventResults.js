@@ -72,7 +72,7 @@ class EventResults extends Component {
           <td>{result.time}</td>
           <td>{result.rank <= 15 ? (result.time * pointsConstant).toFixed(1) : 0}</td>
           <td>
-            <Link to={`/edit/${result._id}`} className="btn btn-success">Edit</Link>
+            <Link to={`/${eventName}/${result._id}`} className="btn btn-success">Edit</Link>
           </td>
           <td>
             <button className="btn btn-danger" onClick={this.onDelete.bind(this, result._id)}>Delete</button>

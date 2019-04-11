@@ -25,7 +25,7 @@ class App extends Component {
           <Route exact path="/add" component={AddEvent} />
           <Route exact path="/" component={Events} />
           <Route exact path="/event/:id" component={EventResults} />
-          <Route exact path="/edit/:id/" component={EditEvent} />
+          <Route exact path="/:eventName/:id/" component={EditEvent} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

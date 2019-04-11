@@ -59,6 +59,9 @@ router.post('/:eventName', async (req, res) => {
 //UPDATE RESULT
 
 router.put('/:eventName/:resultId', async (req, res) => {
+
+
+
   const event = await Event.findOne({ name: req.params.eventName })
   const index = event.results.map(result => result.id.toString()).indexOf(req.params.resultId)
 
@@ -74,6 +77,19 @@ router.put('/:eventName/:resultId', async (req, res) => {
   await event.save()
   await newResult.save()
   await res.json(event)
+})
+
+//GET EVENT RESULT
+
+router.get('/:eventName/:resultId', async (req, res) => {
+  try {
+    const event = await Event.findOne({ name: req.params.eventName })
+
+    const result = event.results.filter(result => result.id === req.params.resultId)
+    await res.json(result)
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 
