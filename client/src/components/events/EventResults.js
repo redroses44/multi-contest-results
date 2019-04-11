@@ -41,10 +41,13 @@ class EventResults extends Component {
   }
 
 
-  onFilter = e => {
+  onFilter = async e => {
+    const { eventName } = this.state
     e.preventDefault()
-    if (this.refs.filterType) {
-      console.log(this.refs.filterType.value)
+    if (this.refs.filterType.value === 'rank') {
+      const response = await axios.get(`http://localhost:5000/api/results/filter/${eventName}`)
+      this.setState({ results: response.data.results })
+
     }
   }
 
@@ -97,13 +100,13 @@ class EventResults extends Component {
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal">Add Result</button>
-              <form onSubmit={this.onFilter} class="form-inline float-md-right mt-3 mt-lg-0">
-                <select ref="filterType" class="form-control mr-2 mt-sm-3 mt-md-0">
-                  <option selected>Choose a filter</option>
+              <form className="form-inline float-md-right mt-3 mt-lg-0">
+                <select ref="filterType" className="form-control mr-2 mt-sm-3 mt-md-0">
+                  <option defaultValue>Choose a filter</option>
                   <option value="points">Filter by points</option>
                   <option value="rank">Filter by rank</option>
                 </select>
-                <button class="btn btn-outline-dark mt-2 mt-md-0" type="submit">Filter</button>
+                <button onClick={this.onFilter} className="btn btn-outline-dark mt-2 mt-md-0" >Filter</button>
               </form>
               <table className="table my-3 table-hover table-responsive-sm">
                 <thead className="bg-light">
