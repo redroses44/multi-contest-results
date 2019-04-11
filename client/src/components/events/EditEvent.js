@@ -92,7 +92,7 @@ class EditEvent extends Component {
                       name="time"
                       onChange={this.onChange} />
                   </div>
-                  <Link to={`/event/5cade3879f562f24b8107fad`} className="btn btn-outline-light btn-block">Back</Link>
+                  <Link to="/" className="btn btn-outline-light btn-block">Back</Link>
                   <input type="submit" value="Edit" className="btn btn-outline-success btn-block my-3" />
                 </form>
               </div>

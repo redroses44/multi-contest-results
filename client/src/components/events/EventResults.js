@@ -47,7 +47,9 @@ class EventResults extends Component {
     if (this.refs.filterType.value === 'rank') {
       const response = await axios.get(`http://localhost:5000/api/results/filter/${eventName}`)
       this.setState({ results: response.data.results })
-
+    } else if (this.refs.filterType.value === 'points') {
+      const response = await axios.get(`http://localhost:5000/api/results/filter/points/${eventName}`)
+      this.setState({ results: response.data.results })
     }
   }
 

@@ -81,22 +81,35 @@ router.put('/:eventName/:resultId', async (req, res) => {
 
 //GET EVENT RESULT
 
-/* router.get('/:eventName/:resultId', async (req, res) => {
-  try {
-    const event = await Event.findOne({ name: req.params.eventName })
 
-    const result = event.results.filter(result => result.id === req.params.resultId)
-    await res.json(result)
-  } catch (e) {
-    console.log(e)
-  }
-}) */
 
 //GET ALL EVENT RESULT & FILTER BY RANK
 
 router.get('/filter/:eventName', async (req, res) => {
+  try {
+    const event = await Event.findOne({ name: req.params.eventName })
+    await event.results.sort((a, b) => (a.rank > b.rank) ? 1 : -1)
+    await res.json(event)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+router.get('/:eventName/:resultId', async (req, res) => {
+  try {
+    const event = await Event.findOne({ name: req.params.eventName })
+    const result = await event.results.filter(result => result.id === req.params.resultId)
+    await res.json(result)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+//GET ALL EVENT RESULT & FILTER BY POINTS
+
+router.get('/filter/points/:eventName', async (req, res) => {
   const event = await Event.findOne({ name: req.params.eventName })
-  event.results.sort((a, b) => (a.rank > b.rank) ? 1 : -1)
+  event.results.sort((a, b) => (parseFloat(a.time) < parseFloat(b.time)) ? 1 : -1)
   res.json(event)
 })
 
