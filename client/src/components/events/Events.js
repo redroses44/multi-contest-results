@@ -40,6 +40,7 @@ class Events extends Component {
         <div className="row">
           <div className="col-md-6 mx-auto">
             <h1 className="display-4 text-center my-4">All Events</h1>
+            <hr className="bg-warning w-25 mb-4" style={{ height: '2px' }} />
             {allEvents}
           </div>
         </div>
