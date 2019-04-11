@@ -8,7 +8,9 @@ Instructions:
 
   * cd multi-contest-results
   * npm i
-  * npm run client-install
-   *npm run app
+  * cd client
+  * npm i
+  * cd ..
+  * npm run app
   
 * Application is now running on http://localhost:3000.
