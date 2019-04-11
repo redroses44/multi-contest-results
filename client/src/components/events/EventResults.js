@@ -41,6 +41,13 @@ class EventResults extends Component {
   }
 
 
+  onFilter = e => {
+    e.preventDefault()
+    if (this.refs.filterType) {
+      console.log(this.refs.filterType.value)
+    }
+  }
+
 
   onSubmit = async e => {
     const { rank, country, athlete, time, eventName } = this.state
@@ -61,7 +68,7 @@ class EventResults extends Component {
 
   render() {
     const { results, eventName, errors } = this.state
-    const pointsConstant = 100
+    const pointsConstant = 1.8
     const allResults = results.length === 0 ?
       'There is no results in this event yet.'
       : results.map(result =>
@@ -70,7 +77,7 @@ class EventResults extends Component {
           <td>{result.country}</td>
           <td>{result.athlete}</td>
           <td>{result.time}</td>
-          <td>{result.rank <= 15 ? (result.time * pointsConstant).toFixed(1) : 0}</td>
+          <td>{result.rank <= 15 ? (result.time * 100 / pointsConstant).toFixed(1) : 0}</td>
           <td>
             <Link to={`/${eventName}/${result._id}`} className="btn btn-success">Edit</Link>
           </td>
@@ -90,6 +97,14 @@ class EventResults extends Component {
                 type="button"
                 data-toggle="modal"
                 data-target="#exampleModal">Add Result</button>
+              <form onSubmit={this.onFilter} class="form-inline float-md-right mt-3 mt-lg-0">
+                <select ref="filterType" class="form-control mr-2 mt-sm-3 mt-md-0">
+                  <option selected>Choose a filter</option>
+                  <option value="points">Filter by points</option>
+                  <option value="rank">Filter by rank</option>
+                </select>
+                <button class="btn btn-outline-dark mt-2 mt-md-0" type="submit">Filter</button>
+              </form>
               <table className="table my-3 table-hover table-responsive-sm">
                 <thead className="bg-light">
                   <tr>
