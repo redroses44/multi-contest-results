@@ -37,6 +37,19 @@ router.get('/:id', (req, res) => {
     })
 })
 
+//GET EVENT BY NAME
+
+router.get('/name/:eventName', async (req, res) => {
+  const event = await Event.findOne({ name: req.params.eventName })
+  if (event) {
+    res.json(event)
+  } else {
+    res.json(404, {
+      noevent: 'Event does not exist.'
+    })
+  }
+})
+
 
 //DELETE EVENT BY ID
 

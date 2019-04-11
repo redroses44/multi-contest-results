@@ -43,6 +43,8 @@ router.post('/:eventName', async (req, res) => {
     rankexists: 'Someone has that rank already.'
   }) : event.results.push(newResult)
 
+
+
   try {
     await event.save()
     await newResult.save()
@@ -53,6 +55,27 @@ router.post('/:eventName', async (req, res) => {
     })
   }
 })
+
+//UPDATE RESULT
+
+router.put('/:eventName/:resultId', async (req, res) => {
+  const event = await Event.findOne({ name: req.params.eventName })
+  const index = event.results.map(result => result.id.toString()).indexOf(req.params.resultId)
+
+  const newResult = new Result({
+    rank: req.body.rank,
+    athlete: req.body.athlete,
+    country: req.body.country,
+    time: req.body.time
+  })
+
+  event.results[index] = newResult
+
+  await event.save()
+  await newResult.save()
+  await res.json(event)
+})
+
 
 //DELETE RESULT 
 
