@@ -26,7 +26,7 @@ class Events extends Component {
     const allEvents = events.map((event) =>
       <div key={event._id} className="card bg-light p-1 my-2">
         <div className="card-body">
-          <span className="lead">Event: {event.name}</span>
+          <span className="lead">{event.name}</span>
           <button
             className="btn btn-outline-danger float-right"
             onClick={this.deleteEvent.bind(this, event._id)}>Delete</button>
