@@ -84,7 +84,7 @@ class EventResults extends Component {
           <td>{result.country}</td>
           <td>{result.athlete}</td>
           <td>{result.time}</td>
-          <td>{result.rank <= 15 ? (result.time * pointsConstant / result.rank).toFixed(1) : 0}</td>
+          <td>{result.rank <= 15 ? (result.time * pointsConstant).toFixed(1) : 0}</td>
           <td>
             <Link previous={previousPath} to={`/${eventName}/${result._id}`} className="btn btn-success">Edit</Link>
           </td>
