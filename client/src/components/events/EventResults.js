@@ -72,6 +72,8 @@ class EventResults extends Component {
   }
 
   render() {
+    const previousPath = this.props.history.location.pathname
+
     const { results, eventName, errors } = this.state
     const pointsConstant = 1.8
     const allResults = results.length === 0 ?
@@ -84,7 +86,7 @@ class EventResults extends Component {
           <td>{result.time}</td>
           <td>{result.rank <= 15 ? (result.time * pointsConstant / result.rank).toFixed(1) : 0}</td>
           <td>
-            <Link to={`/${eventName}/${result._id}`} className="btn btn-success">Edit</Link>
+            <Link previous={previousPath} to={`/${eventName}/${result._id}`} className="btn btn-success">Edit</Link>
           </td>
           <td>
             <button className="btn btn-danger" onClick={this.onDelete.bind(this, result._id)}>Delete</button>
