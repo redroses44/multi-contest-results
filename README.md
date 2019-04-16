@@ -20,10 +20,6 @@ Instructions:
   * OR
   
   
-  
-  * cd multi-contest-results
-  * npm i
-  * npm start
-  * go to https://sheltered-ridge-20282.herokuapp.com/
+  go to https://multicontest.herokuapp.com/
   
 
